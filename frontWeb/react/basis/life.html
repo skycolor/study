@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>基础一——生命周期</title>
+		<script src="http://cdn.bootcss.com/react/15.3.1/react.min.js"></script>
+	    <script src="http://cdn.bootcss.com/react/15.3.1/react-dom.min.js"></script>
+	    <script src="../lib/browser.min.js"></script>
+		<!--
+			这次拿最新版本来写
+		-->
+	</head>
+	<body>
+		<div id="container"></div>
+		<script type="text/babel">
+			var Life = React.createClass({ 		
+				getDefaultProps : function(){
+					console.log("getDefaultProps");
+					return {
+						say : "I like you"
+					}
+				} ,
+				getInitialState : function(){
+					console.log("getInitialState");
+					return {
+						name : "sky" ,
+						age : 26
+					};
+				} ,
+				componentWillMount : function(){
+					console.log("componentWillMount");	
+					this.state.food = "meat";
+				} ,
+				componentDidMount : function(){
+					console.log("componentDidMount");
+					var desDom = ReactDOM.findDOMNode(this.refs.des);
+					setTimeout(function(){
+						desDom.style.color = "red";
+					}.bind(this) , 1000);
+				} ,
+				render: function() { 
+					return (
+						<div>
+							<p>Hello ,{this.props.tip}  World , {this.props.say}</p>
+							<p ref="des">My name is {this.state.name} , and age is {this.state.age} , 
+								I like {this.state.food} </p>
+						</div>
+					)
+				},
+				componentWillReceiveProps : function(){
+					console.log("componentWillReceiveProps");
+				} ,
+				shouldComponentUpdate : function(){
+					console.log("shouldComponentUpdate");
+					return true;
+				} ,
+				componentWillUpdate : function(){
+					console.log("componentWillUpdate");
+				} ,
+				componentDidUpdate : function(){
+					console.log("componentDidUpdate");
+				}
+			}); 
+			var LifeReat = ReactDOM.render(<Life tip="Ms" /> , document.getElementById('container') );
+			
+		</script>
+	</body>
+</html>
