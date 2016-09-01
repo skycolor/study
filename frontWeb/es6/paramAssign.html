@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>变量的解构赋值</title>
+</head>
+<body>
+      <script type="text/javascript">
+          /*
+           *  PS : 我觉得这是一个蛮闪的新功能！！！！！！！！！！！！！！！！！！
+          */
+          //数组赋值 , 可以使用数组进行多个变量的赋值
+          let [a , b , c] = [1 , 2 ,3];
+          console.log(a , b , c);
+          console.log("-------------------------------------------------------------");
+          //json 对象赋值
+          let {name : nVal , age : aVal} = {name : "hf" , age : 26};
+          console.log(nVal , aVal);
+          console.log("-------------------------------------------------------------");
+          /*
+           *  用途一：交换变量的值
+          */
+          var [x , y] = ["x" , "y"];
+          console.log(x , y);
+          [x , y] = [y , x];
+          console.log(x , y);
+          console.log("-------------------------------------------------------------");
+          /*
+           *  用途二：从函数中返回多个值 , 用于赋值 ，这样就不用同一个功能中，需要一个值就去构建一个函数
+          */
+          function example1(){
+              return [7 , 8 , 9 , 10];
+          }
+          let [p , q , m , n] = example1();
+          console.log(p , q , m , n);
+          function example2(){
+              return {
+                  name : "hf" ,
+                  age : 26
+              }
+          }
+          var {name , age} = example2();
+          console.log(name , age);
+          console.log("-------------------------------------------------------------");
+          /*
+           *  用途三：函数参数的定义
+          */
+          function temp1([a , b , c]){
+              console.log(a , b , c);
+          }
+          temp1([4 , 5 , 6]);
+          function temp2({x , y , z}){
+              console.log(x , y , z)
+          }
+          temp2({z : "z" , y : 'y' , x : "x"});
+          console.log("-------------------------------------------------------------");
+          /*
+           *  用途四：提取JSON数据
+          */
+          var jsonData = {
+              id : 10 ,
+              status : "ok" ,
+              data : [100 , 111]
+          };
+          let {id , status , data : nums} = jsonData;
+          console.log(id , status , nums);
+          console.log("-------------------------------------------------------------");
+          /*
+           *  用途五：遍历Map结构
+          */
+          var map = new Map();
+          map.set('first', 'hello');
+          map.set('second', 'world');
+          for (let [key, value] of map) {
+            console.log(key + " is " + value);
+          }
+          for (let [key] of map) {
+            console.log("key is " + key);
+          }
+          for (let [value] of map) {
+            console.log("value is " + value);
+          }
+          console.log("-------------------------------------------------------------");
+          /*
+           *  用途六：输入模块的指定方法
+          */
+          //这种适合node项目  const { SourceMapConsumer, SourceNode } = require("source-map");
+          let {sin , cos , tan} = Math;
+          console.log(sin(Math.PI/6) , cos(Math.PI/6) , tan(Math.PI/6));
+      </script>
+</body>
+</html>

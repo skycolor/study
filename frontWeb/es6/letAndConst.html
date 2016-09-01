@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>let const命令</title>
+</head>
+<body>
+  <script type="text/javascript">
+      /*
+       * let 声明的变量只会在函数块内有效，所以它非常适合在for循环中进行使用
+       * for(let i = 0 ;  i < 5 ; i++)  .....
+      */
+      {
+          var a = 1;
+          let b = 2;
+      }
+      console.log(a);// 1
+      //console.log(b);// undefined
+
+      console.log("--------------------------------------------------------");
+      /* let的语法更加的严谨，不会像var那样有变量提升的现象 */
+      console.log(foo); // 输出undefined
+      //console.log(bar); // 报错ReferenceError
+
+      var foo = 2;
+      let bar = 2;
+
+      /**
+      *  const 修饰的变量，为一个常量，相当于java的final修饰的变量
+      *  同时声明后必须赋值，要不然会报错，其它作用域的用法类似let
+      */
+      const m = 1;
+      // m = 2    TypeError: Assignment to constant variable.
+  </script>
+</body>
+</html>
