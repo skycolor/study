@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>函数</title>
+</head>
+<body>
+    <script type="text/javascript">
+        /**
+         * PS: 我觉得ES6的函数代码变得相当的优美，记录下函数新增的几种使用方式
+        */
+        //方式一：可以在参数中修改默认值，如下2种代码等价，支持在参数中修改默认值
+        {
+            let funcTemp1 = function(a , b){
+                if(!b) b = 2;
+                console.log(a + b)
+            }
+            let funcTemp2 = function(a , b = 2){
+                console.log(a + b);
+            }
+            funcTemp1(5);
+            funcTemp2(5);
+        }
+        //方式二：
+
+
+    </script>
+</body>
+</html>
