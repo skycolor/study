@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>字符串的扩展</title>
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+</head>
+<body>
+    <script type="text/javascript">
+          /*
+           * PS: 在ES6中新增了一些string操作的api，尤其在16进制的处理上
+           *     but个人感觉在实际工作中没什么卵用，遇到什么查什么吧
+           *     这里记录一些有意思的东西，模版开发模式
+          */
+          //方式一：append函数中字符串不用拼接了，碉堡了,``这个不是引号，是tab上面的那个按键
+          {
+              let [name , address] = ["hf" , "wuhan"];
+              $("body").append(`
+                  <ul>
+                    <li>${name}</li>
+                    <li>${address}</li>
+                  </url>`
+              );
+          }
+          //方式二：string拼接会爽不少
+          {
+              let a = "world"
+              let b = `hello ${a}`;
+              console.log(b);
+          }
+          //方式三：日志的打印不需要  /n 这个转义符了
+          {
+              console.log(`
+                My name is hf
+                ,And My age is 26`);
+          }
+          //方式四：在模版表达式中进行运算，甚至可以包裹函数
+          {
+              let [a , b] = [1 , 2];
+              console.log(`${a} + ${b} = ${a + b}`);
+              let fn = () => 'hello I am function';
+              console.log(`Func test , ${fn()}`);
+          }
+          //方式五：模版嵌套，这个炫酷
+          {
+              const temp = dataArr => `
+                  <ul>
+                      ${dataArr.map(data => `
+                            <li>
+                                <span>${data.name}</span>
+                                <span>${data.age}</span>
+                            </li>
+                        `).join('')}
+                  </ul>
+              `;
+              let arr = [
+                  {name : "Li" , age : 18} ,
+                  {name : "Wang" , age : 20} ,
+                  {name : "hf" , age : 26}
+              ]
+              $("body").append(temp(arr));
+          }
+
+
+
+    </script>
+</body>
+</html>
