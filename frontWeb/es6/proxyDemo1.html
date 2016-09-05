@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>proxyDemo 拦截器demo</title>
+</head>
+<body>
+  <script type="text/javascript">
+      /*
+       * PS: 我觉得拦截器是一个很有意思的新功能，它让javascript更像一个后台语言，想想用ES6写node就很激动
+      */
+      //案例一： 别说话，直接看效果，最简单的demo，给对象增加set、get函数的拦截监听器
+      {
+          console.log("-----------------------demo1-----------------------");
+          let obj = new Proxy({}, {
+              get(target , key , receiver){
+                  console.log(`getting $(key) .....`);
+                  return Reflect.get(target, key , receiver);
+              },
+              set(target , key , val , receiver){
+                  console.log(`set ${key} and val is ${val}`);
+                  return Reflect.set(target, key, val, receiver);
+              }
+          });
+          obj.count = 1;
+          ++obj.count;
+      }
+      //案例二：用于对象读取数据的异常处理
+      {
+          console.log("-----------------------demo2-----------------------");
+          let obj = {
+              name : 'hf' ,
+              age : 26
+          }
+          let proxy = new Proxy(obj, {
+              get(target , key){
+                  if(key in target) return target[key];
+                  else throw new ReferenceError(`property ${key} is not find`)
+              }
+          });
+          console.log(proxy.name);
+          //console.log(proxy.xx);    proxyDemo.html:38 Uncaught ReferenceError: property xx is not find
+      }
+      //案例三：前面那2种写法，我并不喜欢，因为不能直接操作原始的target对象，需要操作新建的proxy对象，我更佳喜欢原型链上的调用   （PS : 改造上面的代码，其实也类似）
+      {
+          console.log("-----------------------demo3-----------------------");
+          let proto = new Proxy({
+              name : 'sky' ,
+              age : 26
+            }, {
+              get(target , key){
+                  if(key in target) return target[key];
+                  else throw new ReferenceError(`property ${key} is not find`)
+              }
+          });
+          let obj = Object.create(proto);
+          console.log(obj.name);
+          //console.log(obj.xx);    proxyDemo.html:38 Uncaught ReferenceError: property xxx is not find
+      }
+      //案例四，还是get，给数组增加负数索引的值，为负数时则从末尾开始取值
+      {
+          console.log("-----------------------demo4-----------------------");
+          let createArr = function(...nums){
+              let handle = {
+                  get(target , key , receiver){
+                      let index = Number(key) < 0 ? String(target.length + Number(key)) : key;
+                      return Reflect.get(target, index , receiver);
+                  }
+              };
+              return new Proxy(nums , handle);
+          }
+          let arr1 = createArr('a' , 'b' , 'c');
+          console.log(arr1[-1]);
+          let arr2 = createArr(7 , 8 , 9);
+          console.log(arr2[-1]);
+      }
+      //案例五，set方法，此处为校验对象set年龄，必须为数字，同时不能大于200
+      {
+          console.log("-----------------------demo5-----------------------");
+          let validator = {
+              set(obj , key ,val){
+                  if(key === 'age'){
+                      if(!Number.isInteger(val)){
+                          throw new TypeError('age is not a number');
+                      }else if(val > 200){
+                          throw new RangeError('age is too big');
+                      }
+                  }
+                  obj[key] = val;
+              }
+          };
+          var person = new Proxy({}, validator);
+          person.age = 100;
+          //person.age = 'sk';  Uncaught TypeError: age is not a number
+          //person.age = 300;   //Uncaught RangeError: age is too big
+      }
+      //案例六：通过get和set给对象增加私有属性，比如以_开头的属性，不允许外部访问
+      {
+          console.log("-----------------------demo6-----------------------");
+          let valiData = (obj , prop) => {
+              if(prop[0] === '_') throw new Error(`this property ${prop} is private`);
+          };
+          let handler = {
+              get(target , key){
+                  valiData(target , key);
+                  return target[key];
+              },
+              set(target , key ,val){
+                  valiData(target , key);
+                  target[key] = val;
+              }
+          };
+          var obj = new Proxy({
+              name : 'hf' ,
+              age : 26 ,
+              _phone : "1800******5166" ,
+              _cerCode : "4201***********0814"
+          }, handler);
+          console.log(obj.name);
+          //console.log(obj._phone); Uncaught Error: this property _phone is private
+          obj.age = 998;
+          console.log(obj.age);
+          //obj._cerCode = "456465465465"; Uncaught Error: this property _cerCode is private
+
+      }
+  </script>
+</body>
+</html>
