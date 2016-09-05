@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>set map数组</title>
+</head>
+<body>
+  <script type="text/javascript">
+      /*
+       * PS: set，这个数组类型，它里面的值不会重复
+      */
+      //demo1: 验证其不会重复的特性
+      {
+          var s = new Set();
+          [5 , 6 , 8 , 4 ,4 ,5 , 9 , 7 ,4 ,6].map(val => s.add(val));
+          for(let item of s)  console.log(item);
+      }
+
+  </script>
+</body>
+</html>
