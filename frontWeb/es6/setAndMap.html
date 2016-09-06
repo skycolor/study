@@ -11,11 +11,22 @@
       */
       //demo1: 验证其不会重复的特性
       {
-          var s = new Set();
+          let s = new Set();
           [5 , 6 , 8 , 4 ,4 ,5 , 9 , 7 ,4 ,6].map(val => s.add(val));
           for(let item of s)  console.log(item);
       }
-
+      //demo2: set的几种加入和循环方法
+      {
+          console.log('------------------demo2------------------');
+          let s1 = new Set([1 , 2 , 3]);
+          let s2 = new Set([2 , 3, 4]);
+          let s3 = new Set([...s1 , ...s2]);
+          for(let item of s1.keys()) console.log(item);
+          console.log('-----');
+          for(let item of s2.values()) console.log(item);
+          console.log('-----');
+          s3.forEach((val , key) => console.log(val));
+      }
   </script>
 </body>
 </html>
