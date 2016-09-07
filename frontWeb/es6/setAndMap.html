@@ -27,6 +27,24 @@
           console.log('-----');
           s3.forEach((val , key) => console.log(val));
       }
+      /*
+       * PS; WeakSet结构同Set类似，也是不重复值的集合，不同点是WeakSet只能存储对象，第二点就是WeakSet不能遍历
+      */
+      {
+          console.log('------------------demo3------------------');
+          const wset = new WeakSet();
+          let obj1 = {name : 'hf' , age : 26};
+          let obj2 = {name : 'sky' , age : 18};
+          let obj3 = {name : 'fly' , age : 10};
+          wset.add(obj1);
+          wset.add(obj2);
+          wset.add(obj3);
+          console.log(wset.has(obj1) , wset.has(obj2) ,
+            wset.has(obj3));
+          wset.delete(obj2);
+          console.log(wset.has(obj1) , wset.has(obj2) ,
+            wset.has(obj3));
+      }
   </script>
 </body>
 </html>
