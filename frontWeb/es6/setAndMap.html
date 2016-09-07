@@ -45,6 +45,47 @@
           console.log(wset.has(obj1) , wset.has(obj2) ,
             wset.has(obj3));
       }
+      /*
+       * PS：map 是一种很厉害的Hash结构
+      */
+      //demo4 map可以用对象属性作为key，闪不闪，不过要使用set、get方法
+      {
+          console.log('------------------demo4------------------');
+          let m = new Map();
+          let o = {name : 'hf'};
+          m.set(o , "what");
+          console.log(m.get(o) , m.has(o));
+      }
+      //demo5 可以以数组的形式向map里添加数值
+      {
+          console.log('------------------demo5------------------');
+          let m = new Map([
+              ['name' , 'hf'] ,
+              ['age' , 26]
+          ]);
+          console.log(m.size);
+          console.log(m.has('name') , m.get('name'));
+          console.log(m.has('age') , m.get('age'));
+      }
+      //demo6 map的遍历，有几种方法keys()、values()、entries()、forEach()
+      {
+          console.log('------------------demo6------------------');
+          let m = new Map([
+              ['name' , 'hf'] ,
+              ['age' , '26'] ,
+              ['addr' , 'china']
+          ]);
+          for(let key of m.keys()) console.log(key);
+          console.log('---');
+          for(let v of m.values()) console.log(v);
+          console.log('---');
+          for(let [key , val] of m.entries()) console.log(key , val);
+          console.log('---');
+          for(let [key , val] of m) console.log(key ,val);
+          console.log('---');
+          m.forEach((v , k , m) => console.log(v , k , m));
+
+      }
   </script>
 </body>
 </html>
