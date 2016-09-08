@@ -86,6 +86,16 @@
           m.forEach((v , k , m) => console.log(v , k , m));
 
       }
+      /*
+       * PS: WeakMap，这个东西和Map基本类似，唯一的区别是它只接受对象作为键名，然后就是它没有遍历方法，个人觉得很鸡肋
+      */
+      {
+          console.log('------------------demo7------------------');
+          let m = new WeakMap();
+          //m.set(1 , 2);   Uncaught TypeError: Invalid value used as weak map key
+          m.set(window , 2);
+          console.log(m.get(window));
+      }
   </script>
 </body>
 </html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Iterator 遍历器demo</title>
+</head>
+<body>
+    <script type="text/javascript">
+        /*
+         * js的Iterator跟后台语言的遍历器差不多，就是将循环的对象进行了一个再次封装
+        */
+        //demo1 模拟源码实现
+        {
+            function getIterator(arr){
+                var nextIndex = 0;
+                return {
+                    next : function(){
+                        return  nextIndex < arr.length ?
+                            {val : arr[nextIndex++] , isOver : false} :
+                            {val : undefined , isOver : true};
+                    }
+                }
+            }
+            let nums = getIterator([1 , 2, 4]);
+            console.log(nums.next());
+            console.log(nums.next());
+            console.log(nums.next());
+            console.log(nums.next());
+        }
+        /*
+         * PS: Iterator其实算是ES6的一个内置对象，它让数组对象可以使用for(.. of ..)的方式进行循环遍历
+        */
+        //demo2 字符串操作的遍历
+        {
+            console.log('------------------demo2--------------------');
+            let str = "hufeng";
+            for(let s of str) console.log(s);
+        }
+        //demo3 map的遍历，单个循环返回的是一个Object
+        {
+            console.log('------------------demo3--------------------');
+            let m = new Map().set('name' , 'hf').set('age' , '26');
+            for(let item of m) console.log(item);
+            console.log('------');
+            for(let [key , val] of m) console.log(key , val);
+        }
+        //demo4   set或者普通的数组
+        {
+            console.log('------------------demo4--------------------');
+            let set = new Set(['hf' , 'sky' , 'fly' , 'sky']);
+            let arr = [1 , 2, 5 , 3];
+            for(let s of set) console.log(s);
+            console.log('------');
+            for(let num of arr) console.log(num);
+        }
+    </script>
+</body>
+</html>
