@@ -7,9 +7,84 @@
 <body>
   <script type="text/javascript">
       /*
-       * PS:
+       * PS: 异步的函数称为Generator
       */
+      //demo1 最简单的案例，其中需要一个神奇的'*'号，使用yield就像是使用断点一样，到那一行停止，等待next接着执行
+      {
+          function* helloFunc(){
+              yield 'hf';
+              yield 'sky';
+              return 'feng';
+          }
 
+
+          let hello = helloFunc();
+          console.log(hello.next());
+          console.log(hello.next());
+          console.log(hello.next());
+          console.log(hello.next());
+      }
+      //demo2 一个循环的方法，就当return在用，看看就行
+      {
+          console.log("----------------demo2----------------");
+          let arr = [1, [[2, 3], 4], [5, 6]];
+          let flat = function* (a) {
+            var length = a.length;
+            for (var i = 0; i < length; i++) {
+              var item = a[i];
+              if (typeof item !== 'number') {
+                yield* flat(item);
+              } else {
+                yield item;
+              }
+            }
+          };
+          for (let f of flat(arr)) {
+            console.log(f);
+          }
+      }
+      //demo3 和遍历器的关系
+      {
+          console.log("----------------demo3----------------");
+          let myIterable = {};
+          myIterable[Symbol.iterator] = function* (){
+              yield 1;
+              yield 2;
+              yield 3;
+          }
+          console.log([...myIterable]);
+      }
+      //demo4 向next中传入参数，个人感觉没有什么卵用
+      {
+          console.log("----------------demo4----------------");
+          function* dataParam(){
+              console.log('start');
+              console.log(`1 - ${yield}`);
+              console.log(`2 - ${yield}`);
+          }
+          let param = dataParam();
+          console.log(param.next());
+          console.log('----');
+          console.log(param.next('a'));
+          console.log('----');
+          console.log(param.next('b'));
+      }
+      //demo5 可以使用for of循环遍历Generator函数，需要注意的是当done为true时，循环即结束
+      {
+          console.log("----------------demo5----------------");
+          function* foo(){
+              yield 1;
+              yield 2;
+              yield 3;
+              yield 4;
+              yield 5;
+              yield 6;
+              return 7;
+          }
+          for(let val of foo()){
+              console.log(val);
+          }
+      }
 
   </script>
 </body>
