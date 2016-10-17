@@ -1,6 +1,7 @@
 require('normalize.css/normalize.css');
 require('styles/App.scss');
 
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -12,6 +13,7 @@ const imageDatas = ((arr) => {
         item.imageURL = require('../images/' + item.fileName);
     return arr;
 })(require('json!../data/imageDatas.json'))
+const snowImg = require('../images/snow.png');
 
 /*定义几个公共常用方法*/
 let getRangeRandom = (low , high) => {          //获取某个左闭右开区间内的随机值,[low , high)
@@ -87,6 +89,71 @@ class ControllerUnit extends React.Component {
             + (this.props.arrange.isInverse ? " is-inverse" : "");
         return (
             <span className={className} onClick={this.handleClick} ></span>
+        )
+    }
+}
+/*
+* canvas效果
+*/
+class CanvasEffect extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    componentDidMount(){
+        this.setCanvas1Attr();
+        this.setCanvas2Attr();
+        this.setCanvas3Attr();
+        $(".snow-canvas").snow();
+    }
+    setCanvas1Attr(){
+        let canvasDOM = ReactDOM.findDOMNode(this.refs.canvas1) , canvas = $(canvasDOM);
+        canvas.attr({
+            speed : "1" ,
+            interaction : "false" ,
+            size : "5" ,
+            count : "100" ,
+            opacity : "0.00001" ,
+            "wind-power" : "0" ,
+            image : "false" ,
+            width : "1272" ,
+            height : "150"
+        });
+    }
+    setCanvas2Attr(){
+        let canvasDOM = ReactDOM.findDOMNode(this.refs.canvas2) , canvas = $(canvasDOM);
+        canvas.attr({
+            speed : "3" ,
+            interaction : "true" ,
+            size : "10" ,
+            count : "45" ,
+            opacity : "0.00001" ,
+            "wind-power" : "3" ,
+            image : "false" ,
+            width : "1272" ,
+            height : "150"
+        });
+    }
+    setCanvas3Attr(){
+        let canvasDOM = ReactDOM.findDOMNode(this.refs.canvas3) , canvas = $(canvasDOM);
+        canvas.attr({
+            speed : "3" ,
+            interaction : "true" ,
+            size : "12" ,
+            count : "35" ,
+            "wind-power" : "-5" ,
+            image : snowImg ,
+            width : "1272" ,
+            height : "150"
+        });
+    }
+    render(){     /*渲染函数*/
+        let countArr = [80 , 30 , 20];
+        return (
+            <div>
+                <canvas ref="canvas1" className="snow-canvas"></canvas>
+                <canvas ref="canvas2" className="snow-canvas"></canvas>
+                <canvas ref="canvas3" className="snow-canvas"></canvas>
+            </div>
         )
     }
 }
@@ -234,6 +301,7 @@ class MainPhotoWall extends React.Component {
                 <nav className="controller-nav" >
                     {controlUnits}
                 </nav>
+                <CanvasEffect />
             </section>
         );
     }
