@@ -15,6 +15,8 @@ const imageDatas = ((arr) => {
 })(require('json!../data/imageDatas.json'))
 const snowImg = require('../images/snow.png');
 
+
+
 /*定义几个公共常用方法*/
 let getRangeRandom = (low , high) => {          //获取某个左闭右开区间内的随机值,[low , high)
     return Math.floor(Math.random()*(high - low) + low);
