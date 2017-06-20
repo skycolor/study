@@ -1,0 +1,7 @@
+html, body, div, h1, h2, h3, h4, h5, h6, ul, ol, dl, li,dl,dt, dd, p, blockquote,
+pre, form, fieldset, table, th, td, img, textarea, div,a {border:0 none;margin:0;padding:0;outline:0; vertical-align:baseline;background:transparent;font-family:"微软雅黑" , Arial, Helvetica, sans-serif; font-weight: normal;}
+input{font-family:"微软雅黑";}
+em,i{font-style: normal;}
+ul,ol,li{list-style-type:none;}
+a {color:#333;text-decoration:none; outline:none;/*FF标准去虚线框*/}
+a {star:expression(this.onFocus=this.blur()); /* for Ie*去虚线框*/ }

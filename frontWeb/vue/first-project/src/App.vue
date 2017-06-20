@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <img src="./assets/banner.jpg">
     <hello></hello>
   </div>
 </template>
@@ -17,12 +17,18 @@ export default {
 </script>
 
 <style>
+img{
+    display: inline-block;
+    width: 40%;
+    margin: 0px auto;
+}
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 20px;
 }
 </style>

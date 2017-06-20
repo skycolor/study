@@ -1,0 +1,30 @@
+.header{width: 100%; background: #b02923; overflow: hidden;}
+.header .logo{float: left; margin: 10px 0;}
+.header .loginOut{float: right; margin: 15px 0 0;}
+.header .loginOut span{color: #FFF; font-size: 14px;}
+.header .loginOut a{display: inline-block; font-size: 14px; line-height: 14px; color: #FFF; background: #333; padding: 8px 15px; margin:0 15px;}
+.header .loginOut a:hover{background: #404040;}
+
+.search{width: 100%; padding: 10px 0; background: #f0f0f0; overflow: hidden;}
+.search div{float: left; margin: 0 10px; overflow: hidden;}
+.search div em{float: left; height: 24px; line-height: 24px; font-size: 14px;}
+.search div span{float: left;}
+.search div span input{width: 175px; border: #c6c6c6 1px solid; background-color: #FFF; height: 24px; line-height: 24px; font-size: 14px; text-indent: 5px;}
+.search .s-btn a{display: inline-block; font-size: 14px; line-height: 14px; color: #FFF; background: #b02923; padding: 7px 15px;}
+.search .s-btn a:hover{background: #cd231b;}
+
+.search .export-btn{float: right; margin-right: 15px;}
+.search .export-btn a{display: inline-block; font-size: 14px; line-height: 14px; color: #FFF; background: #b02923; padding: 7px 15px;}
+.search .export-btn a:hover{background: #cd231b;}
+
+.table{width: 100%; overflow: hidden;}
+.table table{width: 100%; background: #ccc;}
+.table table th{font-weight: bold; font-size: 14px; background: #e6e5e5;}
+.table table td{background: #FFF; text-align: center; font-size: 12px; font-family: "宋体"; height: 20px; line-height: 20px;}
+
+.page{width: 100%; text-align: center; font-size: 0px; margin: 15px 0; overflow: hidden;}
+.page a{display: inline-block; font-size: 14px; height: 14px; line-height: 14px; border: #c6c6c6 1px solid; padding: 5px 10px; margin: 0 5px;}
+.page span{display: inline-block; font-size: 14px; height: 14px; line-height: 14px; padding: 5px 10px; margin: 0 5px;}
+.page a:hover{ border: #b02923 1px solid; color: #b02923;}
+.page span.cur{border: #b02923 1px solid; color: #b02923;}
+.page a.st{font-family: "宋体";}

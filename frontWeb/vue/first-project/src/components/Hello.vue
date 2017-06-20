@@ -1,31 +1,40 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://gitter.im/vuejs/vue" target="_blank">Gitter Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-      <br>
-      <li><a href="http://vuejs-templates.github.io/webpack/" target="_blank">Docs for This Template</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
+  <div class="main">
+      <input type="text" v-model="inputVal" @keyup.enter="inputConfirm"  >
+      <ul>
+          <li v-for="item in items" v-text="item.des" @click="handleSelected(item)"
+              :class="{ isUnderline: item.isSelected }"></li>
+      </ul>
   </div>
 </template>
 
 <script>
+import store from "./store";
+
+
 export default {
-  name: 'hello',
+  name: 'main',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+        items : store.getObj() ,
+        inputVal : ""
+    }
+  } ,
+  watch : {
+    items :{
+        handler(val , oldVal){
+           store.saveObj(val);
+        } ,
+        deep : true
+    }
+  } ,
+  methods : {
+    handleSelected(item) {
+       item.isSelected = !item.isSelected;
+    },
+    inputConfirm() {
+       this.items.push({des : this.inputVal , isSelected : false});
+       this.inputVal = "";
     }
   }
 }
@@ -33,21 +42,21 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
-}
+.main{margin-top: 15px;}
+
+input{width: 10%;}
 
 ul {
-  list-style-type: none;
   padding: 0;
+  width: 30%;
+  margin: 30px auto;
 }
 
 li {
-  display: inline-block;
   margin: 0 10px;
 }
-
-a {
-  color: #42b983;
+li.isUnderline {
+  text-decoration: underline;
 }
+
 </style>

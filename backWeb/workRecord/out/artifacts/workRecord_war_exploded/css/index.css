@@ -1,0 +1,21 @@
+body{background: #b02923 url("../images/bg1.jpg") no-repeat center 100px;}
+
+.warp{width: 1000px; margin: 0 auto; overflow: hidden;}
+.header{width: 100%; margin-top: 15px; overflow: hidden;}
+.header .logo{float: left;}
+.header .admin-btn{float: right; font-size: 0px; margin-top: 20px;}
+.header .admin-btn a{display: inline-block; font-size: 14px; line-height: 14px; color: #FFF; background: #333; padding: 10px;}
+.header .admin-btn a:hover{background: #404040;}
+
+.mian{width: 100%; overflow: hidden;}
+.mian .form{width: 510px; padding-bottom: 30px; margin-top: 30px; background: url("../images/black.png") repeat;}
+.mian .form .table ul{padding: 25px 30px; overflow: hidden;}
+.mian .form .table li{width: 100%; margin: 10px 0; float: left; overflow: hidden;}
+.mian .form .table li em{float: left; width: 80px; color: #FFF; height: 28px; line-height: 28px; font-size: 14px;}
+.mian .form .table li span{float: left;}
+.mian .form .table li span input{width: 360px; height: 28px; line-height: 28px; text-indent: 5px; background-color: #FFF; border: none;}
+.mian .form .table .laydate-icon{width: 340px;}
+
+.mian .sub-btn{text-align: center;}
+.mian .sub-btn a{display: inline-block; font-size: 16px; line-height: 16px; color: #FFF; background: #ff7800; padding: 10px 40px;}
+.mian .sub-btn a:hover{background: #ff6600;}
