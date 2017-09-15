@@ -29,7 +29,6 @@ class ModalSwitch extends React.Component {
   // So, to get both screens to render, we can save the old
   // location and pass it to Switch, so it will think the location
   // is still `/` even though its `/img/2`.
-  previousLocation : this.props.location
 
   componentWillUpdate(nextProps) {
     const { location } = this.props

@@ -67,8 +67,6 @@ const NavLink = (props) => (
 
 const HSL = ({ match: { params } }) => (
   <div style={{
-    ...styles.fill,
-    ...styles.hsl,
     background: `hsl(${params.h}, ${params.s}%, ${params.l}%)`
   }}>hsl({params.h}, {params.s}%, {params.l}%)</div>
 )
@@ -84,7 +82,6 @@ styles.fill = {
 }
 
 styles.content = {
-  ...styles.fill,
   top: '40px',
   textAlign: 'center'
 }
@@ -107,7 +104,6 @@ styles.navItem = {
 }
 
 styles.hsl  = {
-  ...styles.fill,
   color: 'white',
   paddingTop: '20px',
   fontSize: '30px'
