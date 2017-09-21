@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+		<title>iPhoneX 刘海娱乐娱乐</title>
+		<style>
+			.box {
+			    max-width: 414px;
+			    height: 667px;
+			    margin: auto;
+			    overflow: auto;
+			}
+			/*此处的shape 就是勾绘下面liuhai的线条*/
+			.shape {				
+			    float: left;
+			    width: 30px; height: 340px;
+			    shape-outside: polygon(0 0, 0 150px, 16px 154px, 30px 166px, 30px 314px, 16px 326px, 0 330px, 0 0);
+			    transition: shape-outside .15s;
+			}
+			.liuhai {
+			    width: 24px; height: 180px;
+			    background: url(liu.png) no-repeat left center;
+			    position: absolute;
+			    margin-top: 150px;
+			}
+			.content ul {
+			    list-style: none;
+			    padding: 0;
+			    margin: 0;
+			}
+			.content li {
+			    border-bottom: 1px solid #eee;
+			    padding: .5em;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box" class="box">
+			<i id="shape" class="shape"></i>
+			<i class="liuhai"></i>
+			<div class="content">
+				<ul>
+					<li>下面是则新闻</li>
+					<li>新华社莫斯科9月20日电</li>
+					<li>根据俄罗斯独立民调机构列瓦达中心</li>
+					<li>20日发布的调查结果</li>
+					<li>67%的受访俄罗斯人</li>
+					<li>希望现任总统普京</li>
+					<li>在2018年总统选举中</li>
+					<li>获胜连任。</li>
+					<li>列瓦达中心8月18日至22日</li>
+					<li>对俄罗斯48个地区的1600名</li>
+					<li>成年人进行调查</li>
+					<li>结果显示</li>
+					<li>希望普京在总统选举中连任的</li>
+					<li>俄罗斯人比例为67%</li>
+					<li>反对普京连任者比例为18%</li>
+					<li>逾半数受访者表示</li>
+					<li>将参与总统选举投票</li>
+					<li>20%的受访者表示不会参与投票</li>
+					<li>9月10日，在俄罗斯莫斯科</li>
+					<li>俄罗斯总统普京在一处地方选举投票站投票</li>
+					<li>俄罗斯中央选举委员会9月18日宣布</li>
+					<li>新一届总统选举将于2018年3月18日举行。</li>
+					<li>俄罗斯舆论普遍希望普京参加总统选举并获得连任</li>
+					<li>京到访俄罗斯布里亚特共和国期间</li>
+					<li>曾被当地民众问及会否参加总统选举</li>
+					<li>普京表示愿意“考虑”。</li>
+					<li>9月9日，在俄罗斯莫斯科红场</li>
+					<li>俄罗斯总统普京（中）出席欢庆活动仪式</li>
+					<li>将参与总统选举投票</li>
+				</ul>
+			</div>
+		</div>
+		<script>
+			var eleShape = document.getElementById('shape');
+			var eleBox = document.getElementById('box');
+			// 保证shape元素高度足够
+			eleShape.style.height = eleBox.scrollHeight + 'px';
+			
+			var funShape = function () {
+			    var scrollTop = eleBox.scrollTop;
+			    // 滚动偏移应用在shape-outside上
+			    var shapeOutside = 'polygon(0 0, 0 '+ (150 + scrollTop) +'px, 16px '+ (154 + scrollTop) +'px, 30px '+ (166 + scrollTop) +'px, 30px '+ (314 + scrollTop) +'px, 16px '+ (326 + scrollTop) +'px, 0 '+ (330 + scrollTop) +'px, 0 0)';
+			    eleShape.style.shapeOutside = shapeOutside;
+			};
+			// 滚动时候实时改变shape形状
+			eleBox.addEventListener('scroll', funShape);
+			funShape();
+		</script>
+	</body>
+</html>
