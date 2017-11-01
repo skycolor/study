@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="https://cdn.bootcss.com/echarts/3.7.2/echarts.min.js"></script>
+	</head>
+	<body>
+		<div id="main" style="width: 800px;height:400px;"></div>
+		<script type="text/javascript">
+			// 基于准备好的dom，初始化echarts实例
+			var myChart = echarts.init(document.getElementById('main'));
+			option = {
+				xAxis: [{		//x轴名称，以及刻度值	
+					name : '时间' ,
+					type: 'category',
+					data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul' ,'Aug']
+				}],
+				yAxis: [{		//y轴名称
+						name : '流量(m³/s)' ,
+						type: 'value'
+					}
+				],
+				series: [		//线性坐标系里的值
+					{
+			            type:'line',
+			            data: [25 , 55 ,56 , 44 , 55 , 51 , 56 , 49]
+			        }
+				]
+			};
+			// 使用刚指定的配置项和数据显示图表。
+			myChart.setOption(option);
+		</script>
+
+	</body>
+
+</html>
