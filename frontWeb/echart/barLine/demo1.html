@@ -10,15 +10,11 @@
 		<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
 		<div id="main" style="width: 800px;height:400px;"></div>
 		<script type="text/javascript">
-			// 基于准备好的dom，初始化echarts实例
 			var myChart = echarts.init(document.getElementById('main'));
-			
-			
 			var xArr = [];
 			var data1Arr = [];
 			var data2Arr = [];
 			var data3Arr = [];
-			
 			for(var i = 0 ; i < 50 ; i++){
 				(function(index){
 					xArr.push("数据" + index);
@@ -28,7 +24,7 @@
 				})(i)
 			}
 			
-			option = {
+			var option = {
 				/*配置页面样式，可以控制y轴以及x轴的样式，包括高度和位置
 				  此处配置了第一个表格高度为35%，而下一个表格距顶部55%，］
 				  同时高度也为35% , 这样这两个表格就从上到下以此排列
