@@ -1,8 +1,11 @@
-# 前端的一些学习demo代码
+## 前端的一些学习demo代码
 
-## angular  学习包，目前为空
-## es6  新标准的学习，根据阮一峰老师的博客来的
-## other  网络上的一些代码copy进来的，留着学习或者以后使用
-## react  react的学习demo，包含基础学习案例以及项目制作
-## sourceCode  用于记录一些js库的源码学习（主要是加入注释和心得啦）
-## othersProject  拷贝别人的项目
+### base	 用来存放基础demo，比如css、js之类
+
+### main 用来存储核心技术demo,比如react、vue、angular、webpack之类
+
+### other 用来存放一些平时感兴趣，但是使用较少的技术
+
+### plugin 用来存放一些插件，比如表格、滚动、日期等
+
+### ui 用来存放一些UI库的demo，以及封装和重构的lib
