@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>layer </title>
+		<style>
+			body{color: #333;}
+			.container{padding: 0;margin: 18px auto;width: 90%;}
+			ul{width: 100%;margin: 16px 0;}
+			ul li{display: inline-block; width: 100px;height: 40px;line-height: 40px;border: solid 1px #bbb;
+				list-style: none;cursor: pointer;text-align: center;
+				border-radius: 4px;margin: 8px 20px 8px 0;}
+			ul li:hover{border-color: #d41934;color: #d41934;}
+		</style>
+	</head>
+	<body>
+		<section class="container" >
+			<h3>信息弹出框</h3>
+			<ul class="info" >
+				<li>demo1</li>
+				<li>demo2</li>
+				<li>demo3</li>
+				<li>demo4</li>
+				<li>demo5</li>
+			</ul>
+		</section>
+		
+		<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://cdn.bootcss.com/layer/3.0.3/layer.js"></script>
+		<script>
+			(function(){
+				/* 信息弹出框 */
+				$('.info li').eq(0).click(function(){
+					layer.alert('信息框1', {
+						icon: 2 ,
+						yes : function(index, layero){
+							console.log('yes');
+							layer.close(index); 		//如果设定了yes回调，需进行手工关闭
+						}
+					});
+				});
+				
+			})()
+		</script>
+	</body>
+</html>
