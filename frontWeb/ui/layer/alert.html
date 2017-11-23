@@ -17,30 +17,49 @@
 		<section class="container" >
 			<h3>信息弹出框</h3>
 			<ul class="info" >
+				<li>demo1_0</li>
+				<li>demo1_1</li>
+				<li>demo1_2</li>
+				<li>demo1_3</li>
+				<li>demo1_4</li>
+				<li>demo1_5</li>
+				<li>demo1_6</li>
+				<br />
+				<li>demo2</li>
+				<br />
+				<li>demo3</li>
+				<br />
+				<li>demo4_0</li>
+				<li>demo4_1</li>
+				<li>demo4_2</li>
+				<li>demo4_3</li>
+				<li>demo4_4</li>
+				<li>demo4_5</li>
+				<li>demo4_6</li>
+				<br />
+				<li>demo5</li>
+			</ul>
+			<h3>提示tips</h3>
+			<ul class="tips" >
 				<li>demo1</li>
 				<li>demo2</li>
 				<li>demo3</li>
 				<li>demo4</li>
 				<li>demo5</li>
 			</ul>
+			<h3>加载层</h3>
+			<ul class="loading" >
+				<li>demo1</li>
+				<li>demo2</li>
+				<li>demo3</li>
+				<li>demo4</li>
+			</ul>
 		</section>
 		
 		<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://cdn.bootcss.com/layer/3.0.3/layer.js"></script>
-		<script>
-			(function(){
-				/* 信息弹出框 */
-				$('.info li').eq(0).click(function(){
-					layer.alert('信息框1', {
-						icon: 2 ,
-						yes : function(index, layero){
-							console.log('yes');
-							layer.close(index); 		//如果设定了yes回调，需进行手工关闭
-						}
-					});
-				});
-				
-			})()
-		</script>
+		<script src="alert_info.js"></script>
+		<script src="alert_tip.js"></script>
+		<script src="alert_loading.js"></script>
 	</body>
 </html>
