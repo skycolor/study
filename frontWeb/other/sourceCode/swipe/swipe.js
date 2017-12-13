@@ -10,11 +10,11 @@ function Swipe(container, options) {
 
   "use strict";
 
-  // utilities
-  var noop = function() {}; // simple no operation function
-  var offloadFn = function(fn) { setTimeout(fn || noop, 0) }; // offload a functions execution
+  // 公共方法
+  var noop = function() {}; // 空方法
+  var offloadFn = function(fn) { setTimeout(fn || noop, 0) }; // 操作一个方法的执行
 
-  // check browser capabilities
+  //检查浏览器
   var browser = {
     addEventListener: !!window.addEventListener,
     touch: ('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch,
@@ -25,8 +25,7 @@ function Swipe(container, options) {
     })(document.createElement('swipe'))
   };
 
-  // quit if no root element
-  if (!container) return;
+  if (!container) return;			//如果没有容器，则退出
   var element = container.children[0];
   var slides, slidePos, width, length;
   options = options || {};
