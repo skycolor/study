@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>js String不经常使用的函数</title>
+	</head>
+	<body>
+		<script>	
+/*
+ * concat 拼接字符串
+ * */
+var str1_1 = 'sky ';
+console.log(str1_1.concat('blue'));//sky blue
+console.log('---------------------------------------------------------');
+/*
+ * slice 字符串截取
+ * 使用方法同数组一样
+ * */
+var str2_1 = 'sky blue';
+var str2_2 = str2_1.slice(1 , 5);
+console.log(str2_1 , str2_2);//sky blue ky b
+console.log('---------------------------------------------------------');
+/*
+ * substring 字符串截取
+ * 使用方法同slice一样
+ * */
+var str3_1 = 'sky blue';
+var str3_2 = str3_1.substring(1 , 5);
+console.log(str3_1 , str3_2);//sky blue ky b
+console.log('---------------------------------------------------------');
+/*
+ * substr 字符串截取
+ * 同样是接收2个参数，一个是开始截取的索引位置，一个是要截取的长度
+ * */
+var str4_1 = 'sky blue';
+var str4_2 = str4_1.substr(1 , 4);
+console.log(str4_1 , str4_2);//sky blue ky b
+console.log('---------------------------------------------------------');
+			
+		</script>
+	</body>
+</html>

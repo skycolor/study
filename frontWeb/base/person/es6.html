@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>js es6常用方法</title>
+	</head>
+	<body>
+		<script>
+/*
+ * filter 数组过滤
+ * 该方法会返回一个新数组
+ * */
+const arr1_1 = [1 , 2 ,3 ,4 ,5];
+let arr1_2 = arr1_1.filter(item => item != 3);
+console.log(arr1_2);//(4) [1, 2, 4, 5]
+console.log('---------------------------------------------------------');
+/*
+ * 数组添加元素
+ * 得到的是一个新数组
+ * */
+const arr2_1 = [1 , 2];
+let arr2_2 = [...arr2_1 , 3 , 4];
+console.log(arr2_2);//(4) [1, 2, 4, 5]
+console.log('---------------------------------------------------------');
+/*
+ * 对象添加
+ * 得到一个新对象
+ * */
+const obj3_1 = {a : 1 , b : 2} , c = 3;
+let obj3_2 = {...obj3_1 , c };
+console.log(obj3_2);//{a: 1, b: 2, c: 3}
+console.log('---------------------------------------------------------');
+/*
+ * 对象覆盖
+ * 覆盖目标对象
+ * */
+let obj4_1 = {a : 1 , b : 2} ,
+	obj4_2 = {a : 11 , b : 22} ,
+	obj4_3 = {c : 3};
+Object.assign(obj4_1 , obj4_2 , obj4_3);
+console.log(obj4_1);//{a: 11, b: 22, c: 3}
+console.log('---------------------------------------------------------');
+/*
+ * 获取对象中的值
+ * */
+const obj5_1 = {a5 : 1 , b5 : 2 , c5 : 3};
+let {a5 , b5 , c5 } = obj5_1;
+console.log(a5 , b5 , c5);//1 2 3
+		</script>
+	</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>js Array不经常使用的函数</title>
+	</head>
+	<body>
+		<script>
+/*
+ * concat 合并数组
+ * 该方法并不会改变原有的数组结构，而是生成一个新的数组
+ * */
+var arr1_1 = [1 , 2 , 3] , arr1_2 = [4 , 5];
+var arr1_3 = arr1_1.concat(arr1_2);
+console.log(arr1_1 , arr1_2 , arr1_3);//(3) [1, 2, 3] (2) [4, 5] (5) [1, 2, 3, 4, 5]
+console.log('---------------------------------------------------------');
+/*
+ * shift 获取数组中的第一个元素
+ * unshift 向数组第一项添加一个元素
+ * 该方法会把数组第一个元素给删除
+ * */
+var arr2_1 = [1 , 2, 3 , 4];
+var item2 = arr2_1.shift();
+console.log(arr2_1 , item2);//(3) [2, 3, 4] 1
+console.log(arr2_1.unshift(1));//(4) [1 ,2, 3, 4]
+console.log('---------------------------------------------------------');
+/*
+ * pop 获取数组中最后一个元素
+ * 该方法会把数组最后一个元素给删除
+ * */
+var arr3_1 = [1 , 2, 3 , 4];
+var item3 = arr3_1.pop();
+console.log(arr3_1 , item3);//(3) [1, 2, 3] 4
+console.log('---------------------------------------------------------');
+/*
+ * slice 截取数组
+ * 该方法不会改变原有数组的结构，两个参数为[)左闭右开的区间，两个参数均代表index索引
+ * */
+var arr4_1 =  [1 , 2, 3 , 4];
+var arr4_2 = arr4_1.slice(1 , 3);
+console.log(arr4_1 , arr4_2);//(4) [1, 2, 3, 4] (2) [2, 3]
+console.log('---------------------------------------------------------');
+/*
+ * splice 
+ * 数组方法中最强大的，包含数组操作的增删改
+ * 它会修改原有的数组结构，并返回一个新数组
+ * 可以传入多个参数splice(index , length , args)
+ * index 开始的索引 length 删除元素的长度 args 向索引处添加的元素（可以为多个）
+ * */
+var arr5_1 = [1 , 2, 3 , 4 , 5];
+//1、删除
+var arr5_2 = arr5_1.splice(1 , 2);
+console.log(arr5_1 , arr5_2);//(3) [1, 4, 5] (2) [2, 3]
+//2、新增
+var arr5_3 = [1 , 2, 3 , 4 , 5];
+var arr5_4 = arr5_3.splice(1 , 0 , 9 , 8);
+console.log(arr5_3 , arr5_4);//(7) [1, 9, 8, 2, 3, 4, 5] []
+//3、修改
+var arr5_5 = [1 , 2, 3 , 4 , 5];
+var arr5_6 = arr5_5.splice(1 , 2 , 9 , 8);
+console.log(arr5_5 , arr5_6);//(5) [1, 9, 8, 4, 5] (2) [2, 3]		
+		</script>
+	</body>
+</html>
