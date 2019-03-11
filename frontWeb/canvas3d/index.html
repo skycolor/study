@@ -1,0 +1,138 @@
+<!-- 初识canvas画布，z轴对齐视觉影像，以及对应计算公式 -->
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>粒子透视</title>
+		<style type="text/css">
+			html,
+			body,
+			canvas {
+				padding: 0;
+				margin: 0;
+				height: 100%;
+				width: 100%;				
+			}
+		</style>
+	</head>
+
+	<body>
+		<canvas id="star"></canvas>
+		<script>
+			window.requestAnimFrame = (function () {
+			  return window.requestAnimationFrame ||
+			    window.webkitRequestAnimationFrame ||
+			    window.mozRequestAnimationFrame ||
+			    function (callback) {
+			      window.setTimeout(callback, 1000 / 60)
+			    }
+			})()
+			// 屏幕对象
+			class Stage{
+				constructor(id){
+					this.canvas = document.getElementById(id);
+					this.ctx = this.canvas.getContext('2d');
+					// 粒子数组，以及数目
+					this.particlesArr = []
+					this.particlesCount = 300
+				}
+				// 初始化
+				init(){
+					this.width = this.canvas.width = document.body.clientWidth
+					this.height = this.canvas.height = document.body.clientHeight
+					this.initParticle()
+				}
+				// 运行
+				render(){
+					this.clear()
+					this.particlesArr.forEach(item => {
+						item.draw()
+					})
+					requestAnimFrame(this.render.bind(this))
+				}
+				// 清空画布
+				clear(){
+					this.ctx.clearRect(0, 0, this.width, this.height);
+					this.ctx.save();
+			        this.ctx.fillStyle = '#000';
+			        this.ctx.fillRect(0, 0, this.width, this.height)
+			        this.ctx.restore();
+				}
+				// 初始化粒子
+				initParticle(){
+					this.particlesArr = []
+					for(let i = 0 ; i < this.particlesCount ; i++){
+						this.particlesArr.push(new Particle({
+							ctx: this.ctx ,
+							width: this.width , 
+							height: this.height
+						}))
+					}
+				}
+			}
+			// 粒子对象
+			class Particle{
+				constructor(opts){
+					this.ctx = opts.ctx;
+					this.width = opts.width;
+					this.height = opts.height;
+					// 中心点的位置
+					this.originX = this.width / 2
+					this.originY = this.height / 2
+					this.minZ = 100
+					this.maxZ = 110
+					this.resetData()
+				}
+				// 重置数据
+				resetData(){
+					this.z = this.minZ + 5 * Math.random()
+					this.zv = 0.002 + 0.002 * Math.random()
+					this.r = 1 + 1.5 * Math.random()
+					// 相对于画布中心点的坐标(PS：之后3D效果的中心点为(originX , originY)然后再来画坐标系，向右为X正轴，向上为Y正轴)
+					this.relativeX = this.width / 4  - ( Math.random() * this.width / 2)
+ 					this.relativeY = this.height / 4 - ( Math.random() * this.height / 2)
+ 					this.x = this.relativeX + this.originX
+					this.y = this.originY - this.relativeY
+				}
+				// 绘制
+				draw(){
+					this.ctx.save();
+			        this.ctx.fillStyle = '#fff';
+			        this.ctx.beginPath();
+			        this.ctx.arc(this.x , this.y ,this.r , 0 , Math.PI*2 , false);
+			        this.ctx.closePath();
+			        this.ctx.fill();
+			        this.ctx.restore();
+			        this.move()
+				}
+				// 移动
+				move(){
+					this.z += this.zv
+					// 当z增加到，大于maxZ时，进行重置
+					if(this.z > this.maxZ || this.x > this.width + this.r || this.x < 0 - this.r 
+						|| this.y < 0 - this.r || this.y > this.height + this.r 
+						|| this.r > this.width ){
+						this.resetData()
+						return
+					}
+					let scale = this.z / this.minZ
+					this.r = scale * this.r
+					this.relativeX = scale * this.relativeX
+					this.relativeY = scale * this.relativeY
+					this.x = this.relativeX + this.originX
+					this.y = this.originY - this.relativeY
+				}
+			}
+			
+			let stage = new Stage('star')
+			stage.init()
+			stage.render()
+			window.onresize = ()=>{
+				stage.init()
+			}
+			
+		</script>
+	</body>
+
+</html>
