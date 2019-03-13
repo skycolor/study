@@ -1,0 +1,164 @@
+<!-- 
+	canvas粒子旋转的效果，核心思想依旧是设立中心点为(w/2 , h/2)，在绘制时重新计算原点的相对位置
+	需要使用三角函数公式
+	1、二角和差公式
+	sin(a + b) = sin a * cos b + cos a * sin b
+	sin(a - b) = sin a * cos b - cos a * sin b
+	cos(a + b) = cos a * cos b - sin a * sin b
+	cos(a - b) = cos a * cos b + sin a * sin b
+	2、最终公式
+	绕x轴旋转b角度
+	y2 = y * cos b - z * sin b
+	z2 = z * cos b + y * sin b
+	x2 = x
+	绕y轴旋转b角度
+	z2 = z * cos b - x * sin b
+	x2 = x * cos b + z * sin b
+	y2 = y
+	绕z轴旋转b角度
+	x2 = x * cos b - y * sinb
+	y2 = y * cos b + x * sinb
+	z2 = z
+	最后，小球在沿Y轴旋转时，z值有正有负，此处将默认视距定为1000，以便于无论z为正为负时，都可以计算出小球的半径
+-->
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>粒子旋转</title>
+		<style type="text/css">
+			html,
+			body,
+			canvas {
+				padding: 0;
+				margin: 0;
+				height: 100%;
+				width: 100%;				
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="particleScreen"></canvas>
+		<script type="text/javascript">
+			window.requestAnimFrame = (function () {
+			  return window.requestAnimationFrame ||
+			    window.webkitRequestAnimationFrame ||
+			    window.mozRequestAnimationFrame ||
+			    function (callback) {
+			      window.setTimeout(callback, 1000 / 60)
+			    }
+			})()
+			// 屏幕对象
+			class Stage{
+				constructor(id){
+					this.canvas = document.getElementById(id);
+					this.ctx = this.canvas.getContext('2d');
+					// 粒子数组，以及数目，颜色集合
+					this.particlesArr = [];
+					this.particlesCount = 400;
+				}
+				// 初始化
+				init(){
+					this.width = this.canvas.width = document.body.clientWidth
+					this.height = this.canvas.height = document.body.clientHeight
+					// 中心点的位置
+					this.originX = this.width / 2
+					this.originY = this.height / 2
+					this.initParticle()
+				}
+				// 运行
+				render(){
+					this.clear()
+					this.particlesArr.forEach(item => {
+						item.draw()
+					})
+					requestAnimFrame(this.render.bind(this))
+				}
+				// 清空画布
+				clear(){
+					this.ctx.clearRect(0, 0, this.width, this.height);
+				}
+				// 初始化粒子
+				initParticle(){
+					this.particlesArr = []
+					for(let i = 0 ; i < this.particlesCount ; i++){
+						this.particlesArr.push(new Particle({
+							ctx: this.ctx ,
+							width: this.width , 
+							height: this.height ,
+							originX: this.originX ,
+							originY: this.originY 
+						}))
+					}
+				}
+			}
+			// 粒子对象
+			class Particle{
+				constructor(opts){
+					this.ctx = opts.ctx;
+					this.width = opts.width;
+					this.height = opts.height;
+					this.originX = opts.originX;
+					this.originY = opts.originY;
+					this.r = 255 * Math.random();
+					this.g = 255 * Math.random();
+					this.b = 255 * Math.random();
+					this.resetData()
+				}
+				// 重置数据
+				resetData(){
+					this.color = `rgb(${this.r},${this.g},${this.b})`
+					this.o = 0.6 + 0.3 * Math.random();
+					// 默认小球半径
+					this.defR = 2.5 + 2.5 * Math.random();
+					// 随机z轴的默认距离
+					this.defZ = this.width / 10 + ( Math.random() * this.width / 10 ) 
+					// 相对中心点的x , y(默认采用)
+					this.relativeX = 0;
+					this.relativeY = this.height / 2 - ( Math.random() * this.height );
+					// 默认旋转的角度
+					this.rotateY = 360 * Math.random();
+					// 旋转速度
+					this.rotateV = 1 + 1.5 * Math.random()
+					// 默认视距!!!!!!!!!!(  )
+					this.eyeLos = 1000
+					this.calculate()
+					
+				}
+				// 计算对于canvas画布的尺寸和位置
+				calculate(){
+					this.z = this.defZ * Math.cos( Math.PI * this.rotateY / 180 )
+					this.relativeX = this.defZ * Math.sin( Math.PI * this.rotateY / 180 )
+					this.r = this.z > 0 ? ( this.defR * (this.z + this.eyeLos) / this.eyeLos ) :
+						( this.defR * (this.eyeLos - Math.abs(this.z)) / this.eyeLos )
+					this.x = this.relativeX + this.originX
+					this.y = this.originY - this.relativeY
+				}
+				// 绘制
+				draw(){
+					this.ctx.save();
+					this.ctx.globalAlpha = this.o
+			        this.ctx.fillStyle = this.color;
+			        this.ctx.beginPath();
+			        this.ctx.arc(this.x , this.y ,this.r , 0 , Math.PI*2 , false);
+			        this.ctx.closePath();
+			        this.ctx.fill();
+			        this.ctx.restore();
+			        this.move()
+				}
+				// 移动
+				move(){
+					this.rotateY += this.rotateV
+					this.calculate()
+				}
+			}
+			
+			let stage = new Stage('particleScreen')
+			stage.init()
+			stage.render()
+			window.onresize = ()=>{
+				stage.init()
+			}
+		</script>
+	</body>
+</html>
