@@ -46,11 +46,11 @@
 					this.originX = this.width / 2
 					this.originY = this.height / 2
 					// 球体半径
-					this.ballR = 150
+					this.ballR = parseInt(3 * this.height / 7)
 					// 一个整圆弧有多少个点
 					this.particleNum = 10
 					// 默认视距
-					this.eyeLos = 1000
+					this.eyeLos = 500
 					this.initParticle()
 				}
 				// 运行
@@ -69,9 +69,12 @@
 				initParticle() {
 					this.particlesArr = []
 					// 弧线
-					for(let i = 0; i <= 2 * Math.PI; i += Math.PI / 5) {
+					for(let i = 0; i <= 2 * Math.PI; i += Math.PI / 18) {
+						if(i == 0 || i == 2 * Math.PI || i == Math.PI) continue
 						// 旋转的角度
-//						for(let j = 0; j <= 2 * Math.PI; j += Math.PI / 5) {
+						for(let j = 0; j <= 2 * Math.PI; j += Math.PI / 18) {
+							// 过滤z很小的粒子
+							if( Math.abs(Math.sin(i)) < 0.1  ) continue
 							this.particlesArr.push(new Particle({
 								ctx: this.ctx,
 								width: this.width,
@@ -79,12 +82,12 @@
 								originX: this.originX,
 								originY: this.originY,
 								eyeLos: this.eyeLos,
-								rotateY: 0,
-								defZ: 500 + this.ballR * Math.sin(i),
+								rotateY: j,
+								relativeZ: this.ballR * Math.sin(i),
 								relativeX: 0,
 								relativeY: this.ballR * Math.cos(i)
 							}))
-//						}
+						}
 					}
 				}
 			}
@@ -98,27 +101,28 @@
 					this.originY = opts.originY;
 					this.eyeLos = opts.eyeLos;
 					this.rotateY = opts.rotateY;
-					this.defZ = opts.defZ;
+					this.relativeZ = opts.relativeZ;
 					this.relativeX = opts.relativeX;
 					this.relativeY = opts.relativeY;
+					this.o = 0.5 + 0.3 * Math.random();
 					// 旋转速度
-					this.rotateV = 0.01
-					this.color = 'red'
+					this.rotateV = Math.PI / 250
+					this.color = this.color = `rgb(${255 * Math.random()},${255 * Math.random()},${255 * Math.random()})`
 					this.defR = 3;
 					this.calculate();
 				}
-				// 计算对于canvas画布的尺寸和位置
+				// 计算对于canvas画布的尺寸和位置（此处跟index1和index2不同的是采用相对Z轴坐标，然后以此来计算半径）
 				calculate() {
-					this.z = this.defZ * Math.cos(this.rotateY)
-					this.relativeX = this.defZ * Math.sin(this.rotateY)
-					this.r = this.z > 0 ? (this.defR * (this.z + this.eyeLos) / this.eyeLos) :
-						(this.defR * (this.eyeLos - Math.abs(this.z)) / this.eyeLos)
+					this.z = this.relativeZ * Math.cos(this.rotateY)
+					this.relativeX = this.relativeZ * Math.sin(this.rotateY)
+					this.r = this.defR * (this.z + this.eyeLos) / this.eyeLos
 					this.x = this.relativeX + this.originX
 					this.y = this.originY - this.relativeY
 				}
 				// 绘制
 				draw() {
 					this.ctx.save();
+					this.ctx.globalAlpha = this.o
 					this.ctx.fillStyle = this.color;
 					this.ctx.beginPath();
 					this.ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2, false);
