@@ -18,7 +18,6 @@
                 camera.lookAt(new THREE.Vector3(1, 0, 0));
                 scene.add(camera);
                 
-                // draw axes to help you understand the coordinate
                 drawAxes(scene);
                 
                 var material = new THREE.MeshBasicMaterial({
@@ -26,9 +25,6 @@
                     wireframe: true
                 });
                     
-                // var light = new THREE.DirectionalLight(0xffffff);
-                // light.position.set(-5, 10, 5);
-                // scene.add(light);
 
                 // load font
                 var loader = new THREE.FontLoader();
@@ -39,7 +35,6 @@
                         height: 1
                     }), material);
                     scene.add(mesh);
-                    
                     // render
                     renderer.render(scene, camera);
                 });
