@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>hover文字渐变色动画</title>
+		<style type="text/css">
+			body{
+				padding: 32px;
+			}
+			.info{
+				font-size: 32px;
+			}
+			.info:hover{
+				background-image: -webkit-linear-gradient(left, #561214, #febaf7 50%, #ff0 90%);
+				-webkit-text-fill-color: transparent;
+		        -webkit-background-clip: text;
+		        -webkit-background-size: 200% 100%;
+		        -webkit-animation: masked-animation 2s infinite ease-out;
+			}
+			@keyframes masked-animation {
+		        0%{ background-position: 0 0;}
+		        100% { background-position: -100% 0;}
+		    }
+		</style>
+	</head>
+	<body>
+		<span class="info"  >
+			My name is HF, I like food!!!
+		</span>
+	</body>
+</html>
