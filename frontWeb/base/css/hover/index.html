@@ -2,15 +2,17 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>hover特效</title>
+		<title>盒子hover特效合计</title>
 		<style type="text/css">
+			div img{
+				width: 100%;
+				cursor: pointer;
+			}
+			/* 样式1 */
 			.hover_content1{
 				position: relative;
-				width: 500px;
+				width: 300px;
 				overflow: hidden;
-			}
-			.hover_content1 img{
-				width: 500px;
 			}
 			.hover_content1 i{
 			    position: absolute;
@@ -26,13 +28,69 @@
 				left: 100%;
 				transition: .5s;
 			}
+			/* 样式2 */
+			.hover_content2 a{
+				width: 80px;
+				height: 80px;
+				display: inline-block;
+				transition: .2s;
+				margin-right: 24px;
+			}
+			.hover_content2 a img{
+				width: 80px;
+			}
+			.hover_content2 a:nth-child(1):hover{
+				transform: translatey(-4px);
+				box-shadow: 0 0 15px rgba(0,0,0,0.3);
+			}
+			.hover_content2 a:nth-child(2):hover{
+				transform: scale(1.04);
+			}
+			.hover_content2 a:nth-child(3):hover img{
+				opacity: .7;
+			}
+			/* 样式3 */
+			.hover_content3{
+				display: flex;
+			}
+			.hover_content3 .hover_content3_item{
+				position: relative;
+				width: 120px;
+				height: 120px;
+			}
+			.hover_content3 .hover_content3_item .tran_content{
+				position: absolute;
+				top: 0;
+				height: 0;
+			}
 		</style>
 	</head>
 	<body>
-		<div class="container" >
-			<div class="hover_content1" >
-				<img src="https://today-service-app-banner-image.oss-cn-hangzhou.aliyuncs.com/image/2020/4/19/1587268242288.jpg"/>
-				<i></i>
+		<p>仿造JD广告位hover效果</p>
+		<div class="hover_content1" >
+			<img src="img/banner.jpg"/>
+			<i></i>
+		</div>
+		<p>上移、放大、蒙版</p>
+		<div class="hover_content2" >
+			<a href="#" >
+				<img src="img/logo.jpg" >
+			</a>
+			<a href="#" >
+				<img src="img/logo.jpg" >
+			</a>
+			<a href="#" >
+				<img src="img/logo.jpg" >
+			</a>
+		</div>
+		<!-- 卡片式动效 -->
+		<div class="hover_content3" >
+			<div class="hover_content3_item" >
+				<img src="img/logo.jpg" >
+				<div class="tran_content" >
+					<h2>My name is</h2>
+					<p>Sky</p>
+				</div>
 			</div>
 		</div>
 	</body>
